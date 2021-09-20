@@ -1,9 +1,38 @@
+require 'byebug'
 class PolyTreeNode
-  def initialize(value)
+  attr_reader :value, :parent, :children
+  def initialize(value=nil)
     @value = value
     @parent = nil
     @children = []
   end 
 
-  # spec/00_tree_node_spec.rb:118
+  def parent=(new_parent=nil)
+    @parent = new_parent
+    if !@parent.children.include?(self)
+      # debugger
+      @parent.children << self
+      # var = self.children.index(self)
+      # self.children.delete_at(var)
+
+    end
+
+    
+
+  end
+
+  def add_child
+  end
+
+  def remove_child
+  end
+
+  def dfs
+  end
+
+  def bfs
+  end
+
+
+
 end
