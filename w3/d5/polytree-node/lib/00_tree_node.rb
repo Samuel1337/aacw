@@ -21,8 +21,6 @@ class PolyTreeNode
     end
   end
 
-  def add_child(parent)
-    self.parent=
   def add_child(child)
     child.parent = self if child.parent != self 
   end
@@ -32,7 +30,18 @@ class PolyTreeNode
     child.parent = nil
   end
 
-  def dfs
+  def dfs(target_value)
+    #memory where it puts thigns its seen
+    return self if self.value == target_value 
+
+    self.children.each do |child| #imagiine [child1, child2]
+      child.dfs(target_value)
+      
+
+    end
+
+
+
   end
 
   def bfs
