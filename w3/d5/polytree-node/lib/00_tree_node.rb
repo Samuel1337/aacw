@@ -34,9 +34,11 @@ class PolyTreeNode
     #memory where it puts thigns its seen
     return self if self.value == target_value 
 
+
     self.children.each do |child| #imagiine [child1, child2]
-      child.dfs(target_value)
-      
+      child.dfs(target_value) # memoize ?
+      # if self.value == target_value 
+
 
     end
 
@@ -50,3 +52,10 @@ class PolyTreeNode
 
 
 end
+
+# [paul]
+
+# [kyle, jennifer, lucy]
+
+# [kyle jr, michael, jane]
+
