@@ -9,20 +9,16 @@ class PolyTreeNode
 
   def parent=(new_parent)
     # before reassigning parent, @parent => old_parent 
-    
-    @parent.children
-    
-    @parent = new_parent
-    if !@parent.children.include?(self)
-      # debugger
+    if new_parent != nil 
+      if @parent != nil
+        @parent.children.delete(self)
+      end
+      @parent = new_parent
       @parent.children << self
-      # var = self.children.index(self)
-      # self.children.delete_at(var)
-
+    elsif @parent != nil
+      @parent.children.delete(self)
+      @parent = nil
     end
-
-    
-
   end
 
   def add_child
