@@ -30,32 +30,33 @@ class PolyTreeNode
     child.parent = nil
   end
 
-  def dfs(target_value)
-    #memory where it puts thigns its seen
-    return self if self.value == target_value 
+  # def dfs(target_value)
+  #   #memory where it puts thigns its seen
+  #   return self if self.value == target_value 
 
 
-    self.children.each do |child| #imagiine [child1, child2]
-      child.dfs(target_value) # memoize ?
-      # if self.value == target_value 
+  #   self.children.each do |child| #imagiine [child1, child2]
+  #     child.dfs(target_value) # memoize ?
+  #     # if self.value == target_value 
 
 
-    end
+  #   end
 
 
 
-  end
+  # end
 
-  def bfs
+  def bfs(target)
+    queue = [self]
+    
+    queue.each do |node|
+      node.children.each { |child| queue << child }
+      return node if node.value == target
+    end 
+
+    nil
   end
 
 
 
 end
-
-# [paul]
-
-# [kyle, jennifer, lucy]
-
-# [kyle jr, michael, jane]
-
