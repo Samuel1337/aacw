@@ -7,7 +7,11 @@ class PolyTreeNode
     @children = []
   end 
 
-  def parent=(new_parent=nil)
+  def parent=(new_parent)
+    # before reassigning parent, @parent => old_parent 
+    
+    @parent.children
+    
     @parent = new_parent
     if !@parent.children.include?(self)
       # debugger
