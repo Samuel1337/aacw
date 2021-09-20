@@ -21,7 +21,8 @@ class PolyTreeNode
     end
   end
 
-  def add_child
+  def add_child(parent)
+    self.parent=
   end
 
   def remove_child
