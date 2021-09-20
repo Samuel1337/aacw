@@ -23,9 +23,13 @@ class PolyTreeNode
 
   def add_child(parent)
     self.parent=
+  def add_child(child)
+    child.parent = self if child.parent != self 
   end
 
-  def remove_child
+  def remove_child(child)
+    raise if !child.parent.children.include?(child)
+    child.parent = nil
   end
 
   def dfs
