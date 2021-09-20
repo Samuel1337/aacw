@@ -43,6 +43,7 @@ class PolyTreeNode
     nil
   end
 
+
   def bfs(target)
     queue = [self]
     
@@ -53,7 +54,4 @@ class PolyTreeNode
 
     nil
   end
-
-
-
 end
