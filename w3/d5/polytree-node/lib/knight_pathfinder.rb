@@ -11,8 +11,14 @@ class KnightPathFinder
   end 
   
   def self.valid_moves(position) #if [2,2] this should return an array of length 8, that hass all the sums of @@knight moves added to positon
-    return false if @considered_positions.include?(position)
+    # return false if @considered_positions.include?(position)
+    moves = KNIGHT_MOVES.map do |pos| 
+      left = pos[0] + position[0] 
+      right = pos[1] + position[1]
+      [left, right]
+    end
 
+    moves
   end 
 
   def new_move_positions(position)
