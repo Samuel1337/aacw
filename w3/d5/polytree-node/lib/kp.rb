@@ -1,3 +1,4 @@
+require_relative "00_tree_node.rb"
 class KnightPathFinder
   attr_reader :root_node
   KNIGHT_MOVES = [[1,2], [2,1], [-1,2], [2,-1], [-2,1], [1,-2], [-1,-2], [-2,-1]]
@@ -18,7 +19,12 @@ class KnightPathFinder
       [left, right]
     end
 
-    moves
+    moves.select do |pos|
+      ps = row, col
+      check_row = row =< 7 && row >= 0
+      check_col = col =< 7 && col >= 0
+      check_col && check_row
+    end
   end 
 
   def new_move_positions(position)
