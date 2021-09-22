@@ -3,10 +3,13 @@ require "singleton"
 
 class NullPiece < Piece
   include Singleton
-  attr_reader :color, :symbol
+  attr_reader :color, :name
   def initialize
+    @name = "_"
     @color = :none
-    @symbol = "_"
   end
 
 end
+
+n = NullPiece.instance
+p n

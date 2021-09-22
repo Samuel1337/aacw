@@ -24,7 +24,11 @@ class Board
     puts "      "
   end
 
-  PIECES_LOCATIONS = { [0,0] => Rook.new([0,0]), [0,1] => Knight.new([0,1]), [0,2] => Bishop.new([0,2]),  [0,3] => King.new([0,3]), [0,4] => Queen.new([0,4]), [0,5] => Bishop.new([0,5]), [0,6] => Knight.new([0,6]), [0,7] => Rook.new([0,7]) }
+  PIECES_LOCATIONS = {
+     [0,0] => Rook.new([0,0]), [0,1] => Knight.new([0,1]), [0,2] => Bishop.new([0,2]),  [0,3] => King.new([0,3]), [0,4] => Queen.new([0,4]), [0,5] => Bishop.new([0,5]), [0,6] => Knight.new([0,6]), [0,7] => Rook.new([0,7]),
+
+     [7,0] => Rook.new([7,0]), [7,1] => Knight.new([7,1]), [7,2] => Bishop.new([7,2]),  [7,3] => Queen.new([7,3]), [7,4] => King.new([7,4]), [7,5] => Bishop.new([7,5]), [7,6] => Knight.new([7,6]), [7,7] => Rook.new([7,7])  
+}
 
   def populate
     (0..7).each do |row|
@@ -63,6 +67,9 @@ end
 
 b = Board.new
 b.render
+
+p b[[0,0]]
+p b[[1,1]]
 # b.move_piece([0,0], [4,4])
 # b.render
 # b.move_piece([3,3], [3,2])

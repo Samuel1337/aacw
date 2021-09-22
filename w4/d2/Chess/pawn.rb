@@ -33,6 +33,7 @@ class Pawn < Piece
 
   end
 
+
   
   # forward direction method that reads color and returns 1 or -1
   # forward steps ?? what does it do?
