@@ -1,11 +1,11 @@
-require_relative "rook"
-require_relative "bishop"
-require_relative "king"
-require_relative "knight"
-require_relative "queen"
-require_relative "pawn"
-require_relative "piece"
-require_relative "null_piece"
+require_relative "./tokens/rook"
+require_relative "./tokens/bishop"
+require_relative "./tokens/king"
+require_relative "./tokens/knight"
+require_relative "./tokens/queen"
+require_relative "./tokens/pawn"
+require_relative "./tokens/piece"
+require_relative "./tokens/null_piece"
 require 'byebug'
 class Board
 
@@ -67,13 +67,13 @@ class Board
 
 end
 
-b = Board.new
-b.render
+# b = Board.new
+# b.render
 
-p b[[0,0]]
-p b[[1,1]]
-b.move_piece([0,0], [4,4])
-b.render
-p b[[0,0]]
-b.move_piece([3,3], [3,2])
+# p b[[0,0]]
+# p b[[1,1]]
+# b.move_piece([0,0], [4,4])
+# b.render
+# p b[[0,0]]
+# b.move_piece([3,3], [3,2])
 
