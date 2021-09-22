@@ -1,5 +1,5 @@
 require_relative "piece"
-
+require 'byebug'
 class Board
 
   def initialize
@@ -39,6 +39,7 @@ class Board
   def move_piece(start_pos, end_pos)
     raise "invalid move" if self[start_pos] == "_"
     self[end_pos] = self[start_pos]
+    self[start_pos].pos = end_pos
     self[start_pos] = "_"
   end
 
