@@ -1,7 +1,6 @@
 require 'byebug'
 module Slidable
   def horizontal_dirs
-    debugger
     horizontals = []
     pos = self.pos #imagine position is [1,1]
     (0..7).each do |i|
@@ -9,7 +8,7 @@ module Slidable
       horizontals << [i, pos[1]]
 
     end
-    horizontals
+    horizontals.uniq
   end
 
   def diagonal_dirs 
@@ -22,7 +21,8 @@ module Slidable
         diags << [i, j] if (i + pos[0] == j + pos[1] )
       end
     end
-    diags
+    diags.uniq
   end
  
 end
+
