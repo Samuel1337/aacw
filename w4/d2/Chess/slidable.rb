@@ -1,13 +1,12 @@
+require 'byebug'
 module Slidable
-
-
-
   def horizontal_dirs
+    debugger
     horizontals = []
     pos = self.pos #imagine position is [1,1]
     (0..7).each do |i|
       horizontals << [pos[0], i]
-      horizontals << [i, pos[i]]
+      horizontals << [i, pos[1]]
 
     end
     horizontals

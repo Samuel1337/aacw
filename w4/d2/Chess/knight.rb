@@ -17,12 +17,6 @@ class Knight < Piece
       right = pos[1] + position[1]
       [left, right]
     end
-
-    moves.select do |pos|
-      row, col = pos
-      check_row = (row <= 7 && row >= 0)
-      check_col = (col <= 7 && col >= 0)
-      check_col && check_row
-    end
+    moves_select(moves)
   end 
 end
