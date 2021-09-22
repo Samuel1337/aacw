@@ -1,5 +1,5 @@
 require_relative "slidable"
-require_relative 'piece'
+require_relative "piece"
 
 class Rook < Piece
   include Slidable
@@ -15,5 +15,3 @@ class Rook < Piece
 
 end
 
-r = Rook.new([0,0])
-p r.valid_positions
