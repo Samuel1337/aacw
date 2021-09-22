@@ -100,5 +100,23 @@ class Cursor
   end
 
   def update_pos(diff)
+    row_1, col_1 = diff
+    row_2, col_2 = @cursor_pos
+    temp_pos = [(row_1 + row_2), (col_1 + col_2)]
+
+    if check_pos?(temp_pos)
+      temp_pos
+    else
+      raise "invalid cursor position"
+    end
   end
+
+  def check_pos?(pos)
+    row, col = pos
+    check_row = (row <= 7 && row >= 0)
+    check_col = (col <= 7 && col >= 0)
+    check_col && check_row
+  end
+
+
 end

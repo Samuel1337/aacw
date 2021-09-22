@@ -9,19 +9,20 @@ require_relative "./tokens/null_piece"
 require 'byebug'
 class Board
 
+  attr_reader :rows
 
   def initialize
     @rows = Array.new(8){Array.new(8, NullPiece.instance)}
     populate
   end
 
-  def render
-    puts "      "
-    @rows.each do |row|
-      puts row.join(" ")
-    end
-    puts "      "
-  end
+  # def render
+  #   puts "      "
+  #   @rows.each do |row|
+  #     puts row.join(" ")
+  #   end
+  #   puts "      "
+  # end
 
   PIECES_LOCATIONS = {
      [0,0] => Rook.new([0,0]), [0,1] => Knight.new([0,1]), [0,2] => Bishop.new([0,2]),  [0,3] => King.new([0,3]), [0,4] => Queen.new([0,4]), [0,5] => Bishop.new([0,5]), [0,6] => Knight.new([0,6]), [0,7] => Rook.new([0,7]),
