@@ -5,14 +5,13 @@ require_relative "knight"
 require_relative "queen"
 require_relative "pawn"
 require_relative "piece"
-# require_relative "null_piece"
+require_relative "null_piece"
 require 'byebug'
 class Board
 
-  # PIECES_LOCATIONS = { "R" => [[0,0], [0,7]]}
 
   def initialize
-    @rows = Array.new(8){Array.new(8, "_")}
+    @rows = Array.new(8){Array.new(8, NullPiece.instance)}
     populate
   end
 
@@ -36,10 +35,9 @@ class Board
         if (0..1).include?(row) || (6..7).include?(row)
           temp_pos = [row, col]
           if PIECES_LOCATIONS.keys.include?(temp_pos)
-            # debugger
             @rows[row][col] = PIECES_LOCATIONS[temp_pos]
           else
-            @rows[row][col] = Piece.new(temp_pos)
+            @rows[row][col] = Pawn.new(temp_pos)
           end
         end
       end
@@ -57,10 +55,14 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
-    raise "invalid move" if self[start_pos] == "_"
+    raise "invalid move" if self[start_pos].is_null?
+    moving_piece = self[start_pos]
+    new_location = self[end_pos]
+
+
     self[end_pos] = self[start_pos]
     self[start_pos].pos = end_pos
-    self[start_pos] = "_"
+    self[start_pos] = new_location
   end
 
 end
@@ -70,6 +72,8 @@ b.render
 
 p b[[0,0]]
 p b[[1,1]]
-# b.move_piece([0,0], [4,4])
-# b.render
-# b.move_piece([3,3], [3,2])
+b.move_piece([0,0], [4,4])
+b.render
+p b[[0,0]]
+b.move_piece([3,3], [3,2])
+

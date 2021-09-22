@@ -11,5 +11,5 @@ class NullPiece < Piece
 
 end
 
-n = NullPiece.instance
-p n
+# n = NullPiece.instance
+# p n

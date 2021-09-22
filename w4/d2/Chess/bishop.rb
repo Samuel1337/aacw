@@ -15,5 +15,5 @@ include Slidable
 
 end
 
-b = Bishop.new([0, 2])
-p b.valid_positions
+# b = Bishop.new([0, 2])
+# p b.valid_positions

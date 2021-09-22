@@ -1,6 +1,9 @@
 require_relative 'piece'
+require "byebug"
 
 class Pawn < Piece
+
+  attr_reader
 
   def initialize(pos, name = "p")
     super(pos, name)
@@ -30,15 +33,18 @@ class Pawn < Piece
     attacks << [(row + forward_direction),  (col + forward_direction)]
     attacks << [(row + forward_direction),  (col - forward_direction)]
     #eliminate if there is no enemy
+    attacks
+  end
 
+  def possible_moves
+    row, col = pos
+    moves = [[(row + forward_direction), col]]
+    if (row == 1 && self.color == :black) || (row == 6 && self.color == :white)
+      moves += [[(row + forward_direction + forward_direction), col]]
+    end
+    moves.concat(side_attacks)
   end
 
 
-  
-  # forward direction method that reads color and returns 1 or -1
-  # forward steps ?? what does it do?
-  # possible moves
-  # side attacks return possible side attacks from pos
-
-
 end
+
