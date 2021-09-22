@@ -109,6 +109,7 @@ class Cursor
     else
       raise "invalid cursor position"
     end
+    @cursor_pos = temp_pos
   end
 
   def check_pos?(pos)
