@@ -16,28 +16,32 @@ class Board
     populate
   end
 
-  # def render
-  #   puts "      "
-  #   @rows.each do |row|
-  #     puts row.join(" ")
-  #   end
-  #   puts "      "
-  # end
+  def render
+    puts "      "
+    @rows.each do |row|
+      puts row.join(" ")
+    end
+    puts "      "
+  end
 
-  PIECES_LOCATIONS = {
+  
+
+  def populate
+
+    pieces_locations = {
      [0,0] => Rook.new([0,0], self), [0,1] => Knight.new([0,1], self), [0,2] => Bishop.new([0,2], self),  [0,3] => King.new([0,3], self), [0,4] => Queen.new([0,4], self), [0,5] => Bishop.new([0,5], self), [0,6] => Knight.new([0,6], self), [0,7] => Rook.new([0,7], self),
 
      [7,0] => Rook.new([7,0], self), [7,1] => Knight.new([7,1], self), [7,2] => Bishop.new([7,2], self),  [7,3] => Queen.new([7,3], self), [7,4] => King.new([7,4], self), [7,5] => Bishop.new([7,5], self), [7,6] => Knight.new([7,6], self), [7,7] => Rook.new([7,7], self)  
-}
+    }
 
-  def populate
     (0..7).each do |row|
       (0..7).each do |col|
         if (0..1).include?(row) || (6..7).include?(row)
           temp_pos = [row, col]
-          if PIECES_LOCATIONS.keys.include?(temp_pos)
-            @rows[row][col] = PIECES_LOCATIONS[temp_pos]
+          if pieces_locations.keys.include?(temp_pos)
+            @rows[row][col] = pieces_locations[temp_pos]
           else
+            # debugger
             @rows[row][col] = Pawn.new(temp_pos, self)
           end
         end
@@ -69,11 +73,17 @@ class Board
 end
 
 b = Board.new
+b.render
+p b[[0,1]].valid_moves
+sleep(2)
+b.move_piece([0,1], [0,5])
+b.render
+# p b[[0,4]]
+# p b[[2,1]].valid_moves
 # b.render
 
-p b[[0,4]]
+# p 
 # p b[[1,1]]
-# b.move_piece([0,0], [4,4])
 # b.render
 # p b[[0,0]]
 # b.move_piece([3,3], [3,2])

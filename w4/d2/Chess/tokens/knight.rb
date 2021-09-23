@@ -17,6 +17,7 @@ class Knight < Piece
       right = pos[1] + position[1]
       [left, right]
     end
-    moves_select(moves)
+    on_board_moves = moves_select(moves)
+    on_board_moves.reject { |move| ally_space?(move) }
   end 
 end

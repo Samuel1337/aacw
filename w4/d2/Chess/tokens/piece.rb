@@ -39,7 +39,12 @@ class Piece
   end
 
   def ally_space?(pos)
-    self.color == board[pos].color
+    self.color == self[pos].color
+  end
+
+  def[](pos)
+    row, col = pos
+    @board.rows[row][col]
   end
 
 
