@@ -25,9 +25,9 @@ class Board
   # end
 
   PIECES_LOCATIONS = {
-     [0,0] => Rook.new([0,0]), [0,1] => Knight.new([0,1]), [0,2] => Bishop.new([0,2]),  [0,3] => King.new([0,3]), [0,4] => Queen.new([0,4]), [0,5] => Bishop.new([0,5]), [0,6] => Knight.new([0,6]), [0,7] => Rook.new([0,7]),
+     [0,0] => Rook.new([0,0], self), [0,1] => Knight.new([0,1], self), [0,2] => Bishop.new([0,2], self),  [0,3] => King.new([0,3], self), [0,4] => Queen.new([0,4], self), [0,5] => Bishop.new([0,5], self), [0,6] => Knight.new([0,6], self), [0,7] => Rook.new([0,7], self),
 
-     [7,0] => Rook.new([7,0]), [7,1] => Knight.new([7,1]), [7,2] => Bishop.new([7,2]),  [7,3] => Queen.new([7,3]), [7,4] => King.new([7,4]), [7,5] => Bishop.new([7,5]), [7,6] => Knight.new([7,6]), [7,7] => Rook.new([7,7])  
+     [7,0] => Rook.new([7,0], self), [7,1] => Knight.new([7,1], self), [7,2] => Bishop.new([7,2], self),  [7,3] => Queen.new([7,3], self), [7,4] => King.new([7,4], self), [7,5] => Bishop.new([7,5], self), [7,6] => Knight.new([7,6], self), [7,7] => Rook.new([7,7], self)  
 }
 
   def populate
@@ -38,7 +38,7 @@ class Board
           if PIECES_LOCATIONS.keys.include?(temp_pos)
             @rows[row][col] = PIECES_LOCATIONS[temp_pos]
           else
-            @rows[row][col] = Pawn.new(temp_pos)
+            @rows[row][col] = Pawn.new(temp_pos, self)
           end
         end
       end
@@ -68,13 +68,14 @@ class Board
 
 end
 
-# b = Board.new
+b = Board.new
 # b.render
 
-# p b[[0,0]]
+p b[[0,4]]
 # p b[[1,1]]
 # b.move_piece([0,0], [4,4])
 # b.render
 # p b[[0,0]]
 # b.move_piece([3,3], [3,2])
+
 

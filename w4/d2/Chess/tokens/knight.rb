@@ -5,8 +5,8 @@ class Knight < Piece
   include Stepable
   KNIGHT_MOVES = [[1,2], [2,1], [-1,2], [2,-1], [-2,1], [1,-2], [-1,-2], [-2,-1]]
 
-  def initialize(pos, name="N")
-    super(pos, name)
+  def initialize(pos, board, name="N")
+    super
 
   end
 

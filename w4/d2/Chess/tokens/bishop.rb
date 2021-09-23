@@ -4,8 +4,8 @@ require_relative 'piece'
 class Bishop < Piece
 include Slidable
 
-  def initialize(pos, name="B")
-    super(pos, name)
+  def initialize(pos, board, name="B")
+    super
   end
 
   def valid_positions 

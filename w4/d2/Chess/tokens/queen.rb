@@ -1,11 +1,12 @@
 require_relative "slidable"
 require_relative 'piece'
+# require_relative "../board.rb"
 
 class Queen < Piece
   include Slidable
 
-  def initialize(pos, name="Q")
-    super(pos, name)
+  def initialize(pos, board, name="Q")
+    super(pos, board, name="Q")
 
   end
 
@@ -16,7 +17,7 @@ class Queen < Piece
   end
 
 end
-
-# q = Queen.new([0,4])
+# b = Board.new
+# q = Queen.new([0,4], b)
 
 # q.valid_positions

@@ -4,8 +4,8 @@ require_relative "piece"
 class Rook < Piece
   include Slidable
 
-  def initialize(pos, name="R")
-    super(pos, name)
+  def initialize(pos, board, name="R")
+    super
   end
 
   def valid_positions 

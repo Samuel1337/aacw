@@ -5,8 +5,8 @@ class Pawn < Piece
 
   attr_reader
 
-  def initialize(pos, name = "p")
-    super(pos, name)
+  def initialize(pos, board, name = "*")
+    super(pos, board, name)
 
   end
 

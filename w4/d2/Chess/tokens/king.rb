@@ -5,8 +5,8 @@ class King < Piece
 include Stepable
   KING_MOVES = [[1,0], [0,1], [-1,0], [0,-1], [-1,1], [1,-1], [-1,-1], [1,1]]
 
-  def initialize(pos, name="K")
-    super(pos, name)
+  def initialize(pos, board, name="K")
+    super
 
   end
 

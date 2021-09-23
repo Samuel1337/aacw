@@ -5,14 +5,14 @@
 # require_relative "queen"
 # require_relative "pawn"
 # require_relative "null_piece"
-
+# require_relative "../board.rb"
 require 'byebug'
 class Piece
   attr_accessor :pos
-  attr_reader :name, :color
+  attr_reader :name, :color, :board
 
-  def initialize(pos, name="a")
-    # @board = board
+  def initialize(pos, board, name="a")
+    @board = board
     @pos = pos
     @name = name
     assign_color(pos)
@@ -38,14 +38,10 @@ class Piece
     self.is_a?(NullPiece)
   end
 
-  # def valid_moves
-  #   [pos.map{|el| el + 1}]
-  # end
-
-  def[](pos) 
-    row, col = pos
-    #@board[row][col]
+  def ally_space?(pos)
+    self.color == board[pos].color
   end
+
 
   def moves_select(moves)
     # debugger
