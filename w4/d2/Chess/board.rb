@@ -6,7 +6,7 @@ require_relative "./tokens/queen"
 require_relative "./tokens/pawn"
 require_relative "./tokens/piece"
 require_relative "./tokens/null_piece"
-require 'byebug'
+# require 'byebug'
 class Board
 
   attr_reader :rows
