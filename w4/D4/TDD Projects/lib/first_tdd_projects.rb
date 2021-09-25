@@ -1,10 +1,12 @@
-
+def test
+ "test on friday night by pam"
+end
 
 def my_uniq(arr)
     return arr.uniq
 end
 
-
+   
 class Array
     def two_sum
 
