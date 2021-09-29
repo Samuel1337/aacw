@@ -39,3 +39,20 @@ CREATE TABLE question_likes(
   FOREIGN KEY (question_id) REFERENCES questions.id
   FOREIGN KEY (user_id) REFERENCES users.id
 );
+
+INSERT INTO
+  users (fname, lname)
+VALUES
+ ('David', 'Chan'),  ('Pam', 'Tenney');
+
+INSERT INTO
+  questions (title, body)
+VALUES
+  ('David''s Question', 'How old is the moon?');
+
+
+  --INSERT INTO
+ -- professors (first_name, last_name, department_id)
+--VALUES
+  --('Albert', 'Einstein', (SELECT id FROM departments WHERE name = 'physics')),
+  --('Kurt', 'Godel', (SELECT id FROM departments WHERE name = 'mathematics'));
