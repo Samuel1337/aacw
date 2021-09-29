@@ -14,8 +14,11 @@ CREATE TABLE users(
 
 CREATE TABLE questions(
   id INTEGER PRIMARY KEY,
+  author_id INTEGER NOT NULL,
   title TEXT NOT NULL,
-  body TEXT NOT NULL
+  body TEXT NOT NULL,
+
+  FOREIGN KEY (author_id) REFERENCES users(id)
 );
 
 CREATE TABLE question_follows(
@@ -54,10 +57,10 @@ VALUES
   ('David', 'Chan'),  ('Pam', 'Tenney');
 
 INSERT INTO
-  questions (title, body)
+  questions (title, body, author_id)
 VALUES
-  ('David''s Question', 'How old is the moon?'), 
-  ('Pam''s Question', 'Can I have a T-Rex?');
+  ('David''s Question', 'How old is the moon?', 1), 
+  ('Pam''s Question', 'Can I have a T-Rex?', 2);
 
 INSERT INTO
   question_follows (question_id, user_id)

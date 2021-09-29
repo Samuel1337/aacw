@@ -29,28 +29,27 @@ class Users
   end
 
   def self.find_by_id(id)
-    # p id
-    user = QuestionsDatabase.instance.execute(<<-SQL, id: id)
+    user = QuestionsDatabase.instance.execute(<<-SQL, id)
     SELECT
       *
     FROM
       users
     WHERE
-      id = :id
+      id = ?
     SQL
-    Users.new(user)
+    Users.new(user.first)
   end
 
-  def self.find_by_name(f, l)
-    user = QuestionsDatabase.instance.execute(<<-SQL)
+  def self.find_by_name(fname, lname)
+    user = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
     SELECT
      *
     FROM
       users
     WHERE
-      fname = f AND lname = l
+      fname = ? AND lname = ?
     SQL
-    Users.new(user)
+    Users.new(user.first)
   end
   
 end
@@ -63,8 +62,21 @@ class Questions
     @body = options['body']
   end
 
+  def find_by_author_id(author_id)
+    question = QuestionsDatabase.instance.execute(<<-SQL, author_id)
+    SELECT
+      *
+    FROM
+      questions
+    WHERE
+      
+
+
+    SQL
+  end
+
   def self.find(id)
-    question = QuestionsDatabase.instance.execute(<<-SQL)
+    question = QuestionsDatabase.instance.execute(<<-SQL, id)
     SELECT 
     *
     FROM
