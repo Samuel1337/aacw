@@ -53,7 +53,6 @@ class Users
   end
 
   def self.authored_questions(fname, lname)
-    questions = []
     author_id = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
       SELECT
         id
@@ -63,8 +62,20 @@ class Users
         fname = ? AND lname = ?
     SQL
     arr_hash = Questions.find_by_author_id(author_id.first['id'])
-    arr_hash.each { |hash| questions << hash["body"] }
-    questions
+    arr_hash.map { |hash| hash["body"] }
+  end
+
+  def self.authored_replies(fname, lname)
+    user = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+      SELECT
+        id
+      FROM
+        users
+      WHERE
+        fname = ? AND lname = ?
+    SQL
+    arr_hash = Replies.find_by_user_id(user.first['id'])
+    arr_hash.map { |hash| hash['body'] }
   end
   
 end
@@ -129,10 +140,21 @@ class Replies
       WHERE
         user_id = ?
     SQL
-    p replies
-    Replies.new(replies).select{|hash| hash["body"] }
+    replies
   end
 
+  def self.find_by_question_id(question_id)
+    replies = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT
+        *
+      FROM
+        replies
+      WHERE
+        question_id = ?
+    SQL
+    # p replies
+    replies.map { |hash| Replies.new(hash) }
+  end
 
 end
 
