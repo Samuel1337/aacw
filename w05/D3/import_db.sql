@@ -29,10 +29,12 @@ CREATE TABLE question_follows(
 
 CREATE TABLE replies(
   id INTEGER PRIMARY KEY,
+  question_id INTEGER NOT NULL,
   parent_reply_id INTEGER,
   user_id INTEGER NOT NULL,
   body TEXT NOT NULL,
 
+  FOREIGN KEY (question_id) REFERENCES questions(id),
   FOREIGN KEY (parent_reply_id) REFERENCES replies(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -65,3 +67,18 @@ VALUES
 
   ((SELECT id FROM questions WHERE title = 'Pam''s Question' AND body = 'Can I have a T-Rex?'),
   (SELECT id FROM users WHERE fname = 'Pam' AND lname = 'Tenney'));
+
+INSERT INTO 
+  replies (question_id, parent_reply_id, user_id, body)
+VALUES
+  (2, NULL, 1, 'No'),
+  (2, 1, 2, 'Aw please');
+
+INSERT INTO
+  question_likes (question_id, user_id)
+VALUES
+  (1, 1),
+  (1, 2);
+
+  -- cat import_db.sql | sqlite3 questions.db
+
