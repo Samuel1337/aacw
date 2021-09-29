@@ -21,9 +21,30 @@ class Users
     @lname = options['lname']
   end
 
-  def self.find_by_id
-    Users.new(options)
+  def self.find_by_id(id)
+    user = QuestionsDatabase.instance.execute(<<-SQL)
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = ?
+    SQL
+    Users.new(user)
   end
+
+  def self.find_by_name(f, l)
+    user = QuestionsDatabase.instance.execute(<<-SQL)
+    SELECT
+     *
+    FROM
+      users
+    WHERE
+      fname = f AND lname = l
+    SQL
+    Users.new(user)
+  end
+  
 end
 
 
