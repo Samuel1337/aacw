@@ -1,5 +1,11 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS replies;
+DROP TABLE IF EXISTS question_likes;
+DROP TABLE IF EXISTS question_follows;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS questions;
+
 CREATE TABLE users(
   id INTEGER PRIMARY KEY,
   fname TEXT NOT NULL,
@@ -17,8 +23,8 @@ CREATE TABLE question_follows(
   question_id INTEGER,
   user_id INTEGER,
 
-  FOREIGN KEY (question_id) REFERENCES questions.id
-  FOREIGN KEY (user_id) REFERENCES users.id
+  FOREIGN KEY (question_id) REFERENCES questions(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE replies(
@@ -27,8 +33,8 @@ CREATE TABLE replies(
   user_id INTEGER NOT NULL,
   body TEXT NOT NULL,
 
-  FOREIGN KEY (parent_reply_id) REFERENCES replies.id
-  FOREIGN KEY (user_id) REFERENCES users.id
+  FOREIGN KEY (parent_reply_id) REFERENCES replies(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE question_likes(
@@ -36,23 +42,26 @@ CREATE TABLE question_likes(
   question_id INTEGER,
   user_id INTEGER,
 
-  FOREIGN KEY (question_id) REFERENCES questions.id
-  FOREIGN KEY (user_id) REFERENCES users.id
+  FOREIGN KEY (question_id) REFERENCES questions(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 INSERT INTO
   users (fname, lname)
 VALUES
- ('David', 'Chan'),  ('Pam', 'Tenney');
+  ('David', 'Chan'),  ('Pam', 'Tenney');
 
 INSERT INTO
   questions (title, body)
 VALUES
-  ('David''s Question', 'How old is the moon?');
+  ('David''s Question', 'How old is the moon?'), 
+  ('Pam''s Question', 'Can I have a T-Rex?');
 
+INSERT INTO
+  question_follows (question_id, user_id)
+VALUES 
+  ((SELECT id FROM questions WHERE title = 'David''s Question' AND body = 'How old is the moon?'),
+  (SELECT id FROM users WHERE fname = 'David' AND lname = 'Chan')),
 
-  --INSERT INTO
- -- professors (first_name, last_name, department_id)
---VALUES
-  --('Albert', 'Einstein', (SELECT id FROM departments WHERE name = 'physics')),
-  --('Kurt', 'Godel', (SELECT id FROM departments WHERE name = 'mathematics'));
+  ((SELECT id FROM questions WHERE title = 'Pam''s Question' AND body = 'Can I have a T-Rex?'),
+  (SELECT id FROM users WHERE fname = 'Pam' AND lname = 'Tenney'));
