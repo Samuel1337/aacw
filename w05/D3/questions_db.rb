@@ -51,6 +51,19 @@ class Users
     SQL
     Users.new(user.first)
   end
+
+  def self.authored_questions(fname, lname)
+    # questions = []
+    author_id = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+      SELECT
+        id
+      FROM
+        users
+      WHERE
+        fname = ? AND lname = ?
+    SQL
+    arr = Questions.find_by_author_id(author_id.first[id])
+  end
   
 end
 
@@ -62,16 +75,14 @@ class Questions
     @body = options['body']
   end
 
-  def find_by_author_id(author_id)
+  def self.find_by_author_id(author_id)
     question = QuestionsDatabase.instance.execute(<<-SQL, author_id)
     SELECT
       *
     FROM
       questions
     WHERE
-      
-
-
+      author_id = ?
     SQL
   end
 

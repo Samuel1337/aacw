@@ -3,8 +3,8 @@ PRAGMA foreign_keys = ON;
 DROP TABLE IF EXISTS replies;
 DROP TABLE IF EXISTS question_likes;
 DROP TABLE IF EXISTS question_follows;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
   id INTEGER PRIMARY KEY,
@@ -59,7 +59,8 @@ VALUES
 INSERT INTO
   questions (title, body, author_id)
 VALUES
-  ('David''s Question', 'How old is the moon?', 1), 
+  ('David''s Question', 'How old is the moon?', 1),
+  ('David''s New Question', 'How old is the sun?', 1),
   ('Pam''s Question', 'Can I have a T-Rex?', 2);
 
 INSERT INTO
