@@ -16,6 +16,7 @@ end
 
 
 class Users
+  attr_reader :id
   def self.all
     data = QuestionsDatabase.instance.execute('SELECT * FROM users')
     data.map { |user| Users.new(user) }
@@ -52,41 +53,55 @@ class Users
     Users.new(user.first)
   end
 
-  def self.authored_questions(fname, lname)
-    author_id = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
-      SELECT
-        id
-      FROM
-        users
-      WHERE
-        fname = ? AND lname = ?
-    SQL
-    arr_hash = Questions.find_by_author_id(author_id.first['id'])
-    arr_hash.map { |hash| hash["body"] }
+  def authored_questions
+    Questions.find_by_author_id(@id)
   end
 
-  def self.authored_replies(fname, lname)
-    user = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
-      SELECT
-        id
-      FROM
-        users
-      WHERE
-        fname = ? AND lname = ?
-    SQL
-    arr_hash = Replies.find_by_user_id(user.first['id'])
-    arr_hash.map { |hash| hash['body'] }
+  def authored_replies
+    Replies.find_by_author_id(@id)
   end
+
+  # def self.authored_questions(fname, lname) #wrong
+  #   author_id = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+  #     SELECT
+  #       id
+  #     FROM
+  #       users
+  #     WHERE
+  #       fname = ? AND lname = ?
+  #   SQL
+  #   arr_hash = Questions.find_by_author_id(author_id.first['id'])
+  #   arr_hash.map { |hash| hash["body"] }
+  # end
+
+  # def self.authored_replies(fname, lname) #wrong
+  #   user = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+  #     SELECT
+  #       id
+  #     FROM
+  #       users
+  #     WHERE
+  #       fname = ? AND lname = ?
+  #   SQL
+  #   arr_hash = Replies.find_by_user_id(user.first['id'])
+  #   arr_hash.map { |hash| hash['body'] }
+  # end
   
 end
 
 
 class Questions 
+
   def initialize(options)
     @id = options['id']
     @title = options['title']
     @body = options['body']
     @author_id = options['author_id']
+  end
+
+  def author 
+    User.find_by_id(@author_id)
+
   end
 
   def self.find_by_author_id(author_id)
@@ -98,9 +113,10 @@ class Questions
     WHERE
       author_id = ?
     SQL
+    Question.new(quesiton)
   end
 
-  def self.find(id)
+  def self.find_by_id(id)
     question = QuestionsDatabase.instance.execute(<<-SQL, id)
     SELECT 
     *
