@@ -16,7 +16,8 @@ end
 
 
 class Users
-  attr_reader :id
+  attr_reader :id, :fname, :lname
+
   def self.all
     data = QuestionsDatabase.instance.execute('SELECT * FROM users')
     data.map { |user| Users.new(user) }
@@ -58,7 +59,7 @@ class Users
   end
 
   def authored_replies
-    Replies.find_by_author_id(@id)
+    Replies.find_by_user_id(@id)
   end
 
   # def self.authored_questions(fname, lname) #wrong
@@ -91,7 +92,7 @@ end
 
 
 class Questions 
-
+  
   def initialize(options)
     @id = options['id']
     @title = options['title']
@@ -100,8 +101,7 @@ class Questions
   end
 
   def author 
-    User.find_by_id(@author_id)
-
+    Users.find_by_id(@author_id)
   end
 
   def self.find_by_author_id(author_id)
@@ -113,18 +113,19 @@ class Questions
     WHERE
       author_id = ?
     SQL
-    Question.new(quesiton)
+    question.map { |h| Questions.new(h) }
   end
 
   def self.find_by_id(id)
     question = QuestionsDatabase.instance.execute(<<-SQL, id)
     SELECT 
-    *
+      *
     FROM
-    questions 
+      questions 
     WHERE
-    id = ?
+      id = ?
     SQL
+    Questions.new(question.first)
   end
 end
 
@@ -156,7 +157,7 @@ class Replies
       WHERE
         user_id = ?
     SQL
-    replies
+    replies.map { |hash| Replies.new(hash) }
   end
 
   def self.find_by_question_id(question_id)
@@ -168,7 +169,6 @@ class Replies
       WHERE
         question_id = ?
     SQL
-    # p replies
     replies.map { |hash| Replies.new(hash) }
   end
 
