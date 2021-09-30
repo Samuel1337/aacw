@@ -127,6 +127,10 @@ class Questions
     SQL
     Questions.new(question.first)
   end
+
+  def replies
+    Replies.find_by_question_id(@id)
+  end
 end
 
 
@@ -140,6 +144,7 @@ end
 
 
 class Replies
+  attr_reader :author_id
   def initialize(options)
     @id = options['id']
     @question_id = options['question_id']
@@ -171,6 +176,19 @@ class Replies
     SQL
     replies.map { |hash| Replies.new(hash) }
   end
+
+  def author
+    Users.find_by_id(@user_id)
+  end
+
+  def question
+    Questions.find_by_id(@id)
+  end
+
+  def parent_reply
+    Replies.find_by_user_id(@parent_reply_id)
+  end
+
 
 end
 
