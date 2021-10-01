@@ -3,8 +3,8 @@ class User < ApplicationRecord
   validate(:check_email_valid)
   
   def check_email_valid
-    unless self.email.include?('@')
-      errors[:email] << 'Invalid Email Address. Must Include '@''
+    unless self.email.split("").include?('@')
+      errors[:email] << 'Invalid Email Address. Must Include @'
     end
   end
 
