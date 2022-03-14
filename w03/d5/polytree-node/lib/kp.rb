@@ -54,6 +54,7 @@ class KnightPathFinder
 
   end
 
+  
   def trace_path(end_node)
     path = []
 
