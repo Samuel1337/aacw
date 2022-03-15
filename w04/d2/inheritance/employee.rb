@@ -5,14 +5,12 @@ class Employee
     @title = title
     @salary = salary
     @boss = boss
-    boss.hire(self) if !boss.nil?
+    # boss.hire(self) if !boss.nil
   end
 
   def bonus(multiplier)
     salary*multiplier
   end
-
-
 
 
 end
