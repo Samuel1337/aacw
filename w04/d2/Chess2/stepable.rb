@@ -1,11 +1,11 @@
 require_relative "piece.rb"
-require_relative "board.rb"
+
 
 class Knight < Piece
   KNIGHT_MOVES = [[1,2], [2,1], [-1,2], [2,-1], [-2,1], [1,-2], [-1,-2], [-2,-1]]
   def initialize(pos, board, color)
     super
-    @symbol = :N
+    @symbol = "♘"
   end
 
   def moves
@@ -31,7 +31,7 @@ class King < Piece
   KING_MOVES = [[1,0], [0,1], [-1,0], [0,-1]]
   def initialize(pos, board, color)
     super
-    @symbol = :K
+    @symbol = "♔"
   end
 
   def moves
@@ -53,3 +53,6 @@ class King < Piece
   end
   
 end
+
+# k = King.new(1,1,1)
+# p k
