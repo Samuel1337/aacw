@@ -123,7 +123,7 @@ class ResizingIntSet
         i = item % new_store.length
         new_store[i] << item
       end
-      @store = new_store
+      self.store = new_store
     end
   end
 end
